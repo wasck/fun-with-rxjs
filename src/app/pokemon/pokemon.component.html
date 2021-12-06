@@ -1,0 +1,19 @@
+<mat-toolbar color="secondary">
+  <form [formGroup]="searchForm">
+    <mat-form-field>
+      <mat-label>Search for pokemon:</mat-label>
+      <input matInput 
+        placeholder="Pokemon name"
+        formControlName="text"
+        (keyup)="onKeyUp()">
+    </mat-form-field>
+  </form>
+</mat-toolbar>
+
+<div class="pokemon-container">
+  <mat-card *ngFor="let pokemon of pokemon$ | async">
+    <mat-card-header>
+      {{pokemon.name}}
+    </mat-card-header>
+  </mat-card>
+</div>

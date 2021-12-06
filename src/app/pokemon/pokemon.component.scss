@@ -1,0 +1,29 @@
+mat-toolbar {
+  height: fit-content;
+  & form {
+    width: 100%;
+  
+    & mat-form-field {
+      width: inherit;
+    }
+  }
+
+}
+
+.pokemon-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  & mat-card {
+    margin: 1rem;
+    width: 20rem;
+    
+    & mat-card-header {
+      display: table;
+      width: 100%;
+      text-align: center;
+    }
+  }
+
+}
