@@ -1,0 +1,16 @@
+{
+  "recommendations": [
+    "nrwl.angular-console",
+    "angular.ng-template",
+    "clementvidal.companion-file-switcher",
+    "msjsdiag.debugger-for-chrome",
+    "msjsdiag.debugger-for-edge",
+    "firefox-devtools.vscode-firefox-debug",
+    "dbaeumer.vscode-eslint",
+    "hbenl.vscode-test-explorer",
+    "kavod-io.vscode-jest-test-adapter",
+    "steoates.autoimport",
+    "firsttris.vscode-jest-runner",
+    "esbenp.prettier-vscode"
+  ]
+}

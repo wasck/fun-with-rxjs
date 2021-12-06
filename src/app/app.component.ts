@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'fun-with-rxjs';
+  public title = 'fun-with-rxjs';
 }
