@@ -1,11 +1,15 @@
-<mat-toolbar color="secondary">
+<mat-toolbar color="accent">
   <form [formGroup]="searchForm">
     <mat-form-field>
-      <mat-label>Search for pokemon:</mat-label>
+      <mat-label>Filter by pokémon name:</mat-label>
       <input matInput 
         placeholder="Pokemon name"
         formControlName="text"
         (keyup)="onKeyUp()">
+
+        <button *ngIf="searchForm.value.text" matSuffix mat-icon-button aria-label="Clear" (click)="cleanFilter()">
+          <mat-icon>close</mat-icon>
+        </button>
     </mat-form-field>
   </form>
 </mat-toolbar>

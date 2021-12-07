@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { catchError, debounceTime, map, Observable, Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, Observable, Subject, tap } from 'rxjs';
+import { Pokemon } from './models/pokemon.model';
 import { PokemonService } from './pokemon.service';
 
 @Component({
@@ -10,11 +11,9 @@ import { PokemonService } from './pokemon.service';
 })
 export class PokemonComponent {
   private searchText$ = new Observable<string>();
-  private BOUNCE_TIEM = 500;
+  private BOUNCE_TIEM = 800;
 
-  public readonly pokemon$ = this.pokemonService.pokemon;
-  public readonly errorMessage$ = this.pokemon$
-    .pipe(catchError(error => error));
+  public pokemon$?: Observable<Array<Pokemon>>;
   public searchForm: FormGroup;
   public readonly onKeyUp$ = new Subject<void>();
 
@@ -22,7 +21,6 @@ export class PokemonComponent {
     private pokemonService: PokemonService,
     private formbuilder: FormBuilder
   ) {
-
     this.searchForm = this.formbuilder.group({
       text: ['']
     });
@@ -34,10 +32,18 @@ export class PokemonComponent {
     this.onKeyUp$.next();
   }
 
+  public cleanFilter(): void {
+    this.searchForm.reset()
+  }
+
   private initSubscriptions(): void {
+    this.pokemon$ = this.pokemonService.pokemon;
+    
     this.searchText$ = this.searchForm.valueChanges.pipe(
       debounceTime(this.BOUNCE_TIEM),
-      map(result => result.text)
+      distinctUntilChanged(), // only if different than last
+      map(result => result.text),
+      tap(console.log)
     );
 
     this.searchText$.subscribe();

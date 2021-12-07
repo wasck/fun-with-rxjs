@@ -3,21 +3,20 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, map, Observable, throwError } from 'rxjs';
 import { environment } from './../../environments/environment';
 import { Pokemon, PokemonPageResult } from './models/pokemon.model';
-
 @Injectable({
   providedIn: 'root'
 })
 export class PokemonService {
 
   private readonly pokemonPath = 'pokemon';
-  private readonly pokemon$: BehaviorSubject<Array<Pokemon> | null>;
+  private readonly pokemon$: BehaviorSubject<Array<Pokemon>>;
 
   constructor(private httpClient: HttpClient) {
-    this.pokemon$ = new BehaviorSubject<Array<Pokemon> | null>(null);
+    this.pokemon$ = new BehaviorSubject<Array<Pokemon>>([]);
     this.initPokemon();
   }
 
-  public get pokemon(): Observable<Array<Pokemon> | null> {
+  public get pokemon(): Observable<Array<Pokemon>> {
     return this.pokemon$.asObservable();
   }
 
